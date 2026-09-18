@@ -1,0 +1,5 @@
+Test    with            funny   
+SpecSymbols             
+
+
+12345678

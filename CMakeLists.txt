@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
+SET(CMAKE_CXX_STANDARD 23)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(WordCount LANGUAGES CXX)
 
-add_executable(WordCount main.cpp)
+enable_testing()
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+add_subdirectory(tests)
