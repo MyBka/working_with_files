@@ -1,1 +1,1 @@
-4 5 test_cases/test01/input.txt
+2 5 24 {dir}/input.txt

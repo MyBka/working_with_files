@@ -1,0 +1,8 @@
+  first   line  with	spaces 	
+
+
+wordverticalformcarriage
+a,b;c d.e! (f) [g] {h} <i> 'j' "k"
+   	   
+1234567890 -=+_ @#$%^&*
+last line without newline
