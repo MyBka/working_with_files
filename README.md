@@ -47,13 +47,13 @@ WordCount.exe [OPTION]... [FILE]...
 ### Примеры запуска программы:
 
 ```shell
-WordCount.exe filename1
-WordCount.exe filename1 filename2
-WordCount.exe --words --lines filename1
-WordCount.exe --alnum filename1
-WordCount.exe -l -c filename1
-WordCount.exe -lawc filename1 filename2
-WordCount.exe filename1 filename2 -lw --bytes
+./WordCount filename1
+./WordCount filename1 filename2
+./WordCount --words --lines filename1
+./WordCount --alnum filename1
+./WordCount -l -c filename1
+./WordCount -lawc filename1 filename2
+./WordCount filename1 filename2 -lw --bytes
 ```
 
 ## Ограничения
@@ -67,9 +67,10 @@ WordCount.exe filename1 filename2 -lw --bytes
 
 ## Примечание
 
-Для реализации утилиты потребуется воспользоваться стандартной библиотекой ввода/вывода ([описание](https://en.cppreference.com/w/cpp/io/basic_ifstream)).
-Пример того, как можно организовать парсинг аргументов командной строки, можно посмотреть [здесь](http://www.cplusplus.com/articles/DEN36Up4/).
-Размер входного файла не ограничен и может превышать объем доступной оперативной памяти.
+- Для реализации утилиты потребуется воспользоваться стандартной библиотекой ввода/вывода ([описание](https://en.cppreference.com/w/cpp/io/basic_ifstream)).
+- Пример того, как можно организовать парсинг аргументов командной строки, можно посмотреть [здесь](http://www.cplusplus.com/articles/DEN36Up4/).
+- Учтите, что размер входного файла не ограничен и может превышать объем доступной оперативной памяти.
+- Учтите, что имена файлов могут начинаться с `-` и `--`. Подумайте, как можно это реализовать, и посмотрите, как это делают другие утилиты.
 
 ## ТеорМин
 
