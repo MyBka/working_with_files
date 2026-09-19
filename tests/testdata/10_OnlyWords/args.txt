@@ -1,0 +1,2 @@
+-w
+{dir}/input.txt

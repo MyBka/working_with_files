@@ -11,8 +11,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test_cases/)
-
 add_executable(
     ${PROJECT_NAME}_tests 
     test_generator.cpp
@@ -24,6 +22,12 @@ target_link_libraries(
 )
 
 target_compile_features(${PROJECT_NAME}_tests PRIVATE cxx_std_23)
+
+target_compile_definitions(
+    ${PROJECT_NAME}_tests PRIVATE
+    WORD_COUNT_EXECUTABLE="$<TARGET_FILE:WordCount>"
+    TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/testdata"
+)
 
 add_dependencies(${PROJECT_NAME}_tests WordCount)
 

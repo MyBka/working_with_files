@@ -1,0 +1,3 @@
+--bytes
+-l
+{dir}/input.txt

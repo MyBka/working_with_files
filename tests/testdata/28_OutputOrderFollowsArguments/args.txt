@@ -1,0 +1,3 @@
+-lw
+{dir}/input2.txt
+{dir}/input.txt

@@ -1,0 +1,4 @@
+-lwcm
+{dir}/input.txt
+{dir}/input2.txt
+{dir}/input3.txt

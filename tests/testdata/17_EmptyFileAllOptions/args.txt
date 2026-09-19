@@ -1,0 +1,2 @@
+-lwcm
+{dir}/input.txt

@@ -1,0 +1,4 @@
+-l
+-l
+--lines
+{dir}/input.txt
