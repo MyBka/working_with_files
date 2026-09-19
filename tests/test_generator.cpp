@@ -243,10 +243,15 @@ TEST_P(WordCountTest, MatchesExpected) {
     }
 }
 
-INSTANTIATE_TEST_SUITE_P(FullSuite, WordCountTest, ::testing::ValuesIn(DiscoverTests()),
-                         [](const ::testing::TestParamInfo<TestCase>& info) {
-                             return info.param.GtestName();
-                         });
+INSTANTIATE_TEST_SUITE_P(
+    FullSuite, 
+    WordCountTest, 
+    ::testing::ValuesIn(DiscoverTests()),
+    
+    [](const ::testing::TestParamInfo<TestCase>& info) {
+        return info.param.GtestName();
+    }
+);
 
 TEST(WordCountSuite, TestCasesDiscovered) {
     ASSERT_TRUE(fs::exists("test_cases"))
