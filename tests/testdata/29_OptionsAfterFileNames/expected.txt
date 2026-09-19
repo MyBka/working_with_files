@@ -1,2 +1,2 @@
-2 3 {dir}/input.txt
-1 5 {dir}/input2.txt
+2 3 14 {dir}/input.txt
+1 5 17 {dir}/input2.txt

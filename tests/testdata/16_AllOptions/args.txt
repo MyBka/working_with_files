@@ -1,2 +1,2 @@
--mwcl
+-awcl
 {dir}/input.txt

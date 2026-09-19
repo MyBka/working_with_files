@@ -1,3 +1,4 @@
 --lines
 --words
+--alnum
 {dir}/input.txt

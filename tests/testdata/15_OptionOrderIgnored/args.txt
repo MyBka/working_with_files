@@ -1,3 +1,4 @@
 --bytes
+-a
 -l
 {dir}/input.txt

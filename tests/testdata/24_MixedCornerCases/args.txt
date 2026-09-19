@@ -1,2 +1,2 @@
--lwcm
+-lwca
 {dir}/input.txt

@@ -1,1 +1,1 @@
-8 23 152 152 {dir}/input.txt
+8 23 86 152 {dir}/input.txt
