@@ -43,8 +43,53 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     
 }
 
+void arguments(FILE* file, int* bytes, int* lines, int* alnum, int* words, int argc, char** argv) {
+    for (int i = 1; i < argc; i++) {
+        if (argv[i][0] == '-') {
+            if (argv[i][1] == '-') {
+                if (argv[i][2] == 'l') {
+                    *lines = 0;
+                }
+                if (argv[i][2] == 'w') {
+                    *words = 0;
+                }
+                if (argv[i][2] == 'b') {
+                    *bytes = 0;
+                }
+                if (argv[i][2] == 'a') {
+                    *alnum = 0;
+                }
+            }
+            else {
+                int j = 1;
+                while (argv[i][j] != '\0') {
+                    if (argv[i][j] == 'l') {
+                        *lines = 0;
+                    }
+                    if (argv[i][j] == 'w') {
+                        *words = 0;
+                    }
+                    if (argv[i][j] == 'c') {
+                        *bytes = 0;
+                    }
+                    if (argv[i][j] == 'a') {
+                        *alnum = 0;
+                    }
+                }
+                j++;
+            }
+        }
+    }
+    if (*bytes == -1 && *lines == -1 && *alnum == -1 && *words == -1) {
+        *lines = 0;
+        *words = 0;
+        *bytes = 0;
+    }
+} 
+
 int main(int argc, char** argv) {
     int lines = -1, bytes = -1, words = -1, alnum = -1;
+    int* result[4] = {&lines, &words, &alnum, &bytes};
      
     FILE* file = fopen(argv[argc-1], "r");
 
