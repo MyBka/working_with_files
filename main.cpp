@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdio>
+#include <cctype>
 
 void Counters(FILE *file, int *bytes, int *lines, int *alnum, int *words)
 {
