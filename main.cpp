@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
+void Counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     const size_t bufferSize = 256;
     char buffer[bufferSize];
     char lastChar = '\0';
@@ -47,7 +47,7 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     
 }
 
-void arguments(FILE* file, int* bytes, int* lines, int* alnum, int* words, int argc, char** argv) {
+void Arguments(FILE* file, int* bytes, int* lines, int* alnum, int* words, int argc, char** argv) {
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '-') {
             if (argv[i][1] == '-') {
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
             int simbol;
             if ((simbol = fgetc(file)) == EOF) {
                 
-                arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
+                Arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
                 for (int j = 0; j < 4; j++) {
                     if (*result[j] >= 0) {
                         std::cout << *result[j] << " ";
@@ -123,9 +123,9 @@ int main(int argc, char** argv) {
             }
             rewind(file);
 
-            arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
+            Arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
 
-            counters(file, &bytes, &lines, &alnum, &words);
+            Counters(file, &bytes, &lines, &alnum, &words);
 
             for (int j = 0; j < 4; j++) {
                 if (*result[j] != -1) {
