@@ -11,10 +11,10 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     while ((readFile = fread(buffer, 1, bufferSize, file)) != 0) {
 
         for (int i = 0; i < readFile; i++) {
-            if (buffer[i] == '\n') {
+            if (buffer[i] == '\n' && *lines != -1) {
                 *lines += 1;
             }
-            if ((buffer[i] >= '0' && buffer[i] <= '9') || (std::isalpha(buffer[i]))) {
+            if (((buffer[i] >= '0' && buffer[i] <= '9') || (std::isalpha(buffer[i]))) && *alnum != -1) {
                 *alnum += 1;
                 
             }
@@ -22,7 +22,7 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
                 || buffer[i] == '\v' || buffer[i] == '\f')) {
                     startWord = 1;
             } else {
-                if (startWord == 1) {
+                if (startWord == 1 && *words != -1) {
                     startWord = 0;
                     *words += 1;
                 }
@@ -30,14 +30,15 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
             
 
 
-
-            *bytes += 1;
+            if (*bytes != -1) {
+                *bytes += 1;
+            }
         }
     }
-    if (*bytes > 0) {
+    if (*bytes > 0 && *lines != -1) {
         *lines += 1;
     }
-    if (startWord == 1) {
+    if (startWord == 1 && *words != -1) {
         *words += 1;
     }
     
@@ -75,8 +76,8 @@ void arguments(FILE* file, int* bytes, int* lines, int* alnum, int* words, int a
                     if (argv[i][j] == 'a') {
                         *alnum = 0;
                     }
+                    j++;
                 }
-                j++;
             }
         }
     }
@@ -90,27 +91,62 @@ void arguments(FILE* file, int* bytes, int* lines, int* alnum, int* words, int a
 int main(int argc, char** argv) {
     int lines = -1, bytes = -1, words = -1, alnum = -1;
     int* result[4] = {&lines, &words, &alnum, &bytes};
-     
-    FILE* file = fopen(argv[argc-1], "r");
 
-    if (!file) {
-        std::cout << "No such file" << std::endl;
-        return 1;
+
+    for (int i = 1; i < argc; i++) {
+        if (argv[i][0] != '-') {
+            FILE* file = fopen(argv[i], "r");
+            if (!file) {
+                std::cout << "No such file" << std::endl;
+                continue;
+            }
+            
+            int simbol;
+            if ((simbol = fgetc(file)) == EOF) {
+                
+                arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
+                for (int j = 0; i < 4; j++) {
+                    if (*result[j] >= 0) {
+                        std::cout << *result[j] << " ";
+                    }
+                }
+                continue;
+            }
+            rewind(file);
+
+            arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
+
+            counters(file, &bytes, &lines, &alnum, &words);
+
+            for (int j = 0; j < 4; j++) {
+                if (*result[j] != -1) {
+                    std::cout << *result[j] << " ";
+                }
+            }
+            
+            int charcounter = 0;
+            while (argv[i][charcounter] != '\0') {
+                std::cout << argv[i][charcounter];
+                charcounter++;
+            }
+        
+        
+            fclose(file);
+            std::cout << std::endl;
+
+            lines = -1;
+            bytes = -1;
+            alnum = -1;
+            words = -1;
+        }
+        else {
+            continue;
+        }
+        
+
+
+        
     }
-    
-    int simbol;
-    if ((simbol = fgetc(file)) == EOF) {
-        // Сразу передаем функцию, где будут нулевые переменные (которые надо выводить, остальные скрыты)
-        return 2;
-    }
-    rewind(file);
-
-
-
-    fclose(file);
-    std::cout << "Размер файла в байтах: " << bytes << std::endl;
-
-
 
     return 0;
 }
