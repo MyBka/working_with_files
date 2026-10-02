@@ -4,6 +4,7 @@
 void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     const size_t bufferSize = 256;
     char buffer[bufferSize];
+    char lastChar = '\0';
 
 
     size_t readFile;
@@ -11,6 +12,8 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
     while ((readFile = fread(buffer, 1, bufferSize, file)) != 0) {
 
         for (int i = 0; i < readFile; i++) {
+            lastChar = buffer[i];
+
             if (buffer[i] == '\n' && *lines != -1) {
                 *lines += 1;
             }
@@ -35,7 +38,7 @@ void counters(FILE* file, int* bytes, int* lines, int* alnum, int* words) {
             }
         }
     }
-    if (*bytes > 0 && *lines != -1) {
+    if (lastChar != '\0' && lastChar != '\n' && *lines != -1) {
         *lines += 1;
     }
     if (startWord == 1 && *words != -1) {
@@ -105,11 +108,17 @@ int main(int argc, char** argv) {
             if ((simbol = fgetc(file)) == EOF) {
                 
                 arguments(file, &bytes, &lines, &alnum, &words, argc, argv);
-                for (int j = 0; i < 4; j++) {
+                for (int j = 0; j < 4; j++) {
                     if (*result[j] >= 0) {
                         std::cout << *result[j] << " ";
                     }
                 }
+                int charcounter = 0;
+                while (argv[i][charcounter] != '\0') {
+                    std::cout << argv[i][charcounter];
+                    charcounter++;
+                }
+                std::cout << '\n';
                 continue;
             }
             rewind(file);
@@ -132,7 +141,7 @@ int main(int argc, char** argv) {
         
         
             fclose(file);
-            std::cout << std::endl;
+            std::cout << '\n';
 
             lines = -1;
             bytes = -1;
